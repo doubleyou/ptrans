@@ -3,13 +3,15 @@
 
 parse_transform(Forms, _Options) ->
     Records = parse_records(Forms),
-%%    error_logger:error_report(Forms),
-    {eof, Line} = lists:keyfind(eof, 1, Forms),
-    ParseFunc = parsefunc_body(Records, Line),
-    NewForms = lists:takewhile(
-        fun ({eof, _}) -> false; (_) -> true end,
-        Forms) ++ [ParseFunc] ++ [{eof, Line + parsefunc_lines(Records) + 1}],
-    NewForms.
+    case Records of
+        [] ->
+            Forms;
+        _ ->
+            {eof, Line} = lists:keyfind(eof, 1, Forms),
+            ParseFunc = parsefunc_body(Records, Line),
+            lists:takewhile(fun ({eof, _}) -> false; (_) -> true end, Forms) ++
+                [ParseFunc] ++ [{eof, Line + parsefunc_lines(Records) + 1}]
+    end.
 
 parse_records(Forms) ->
     RawRecords = lists:filter(
