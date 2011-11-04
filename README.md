@@ -1,8 +1,7 @@
 ptrans - a bunch of handy parse transforms
 ==========================================
 
-1. pl2rec - proplist to record converter
-========================================
+<h2>1. pl2rec - proplist to record converter</h2>
 
 A lot of people prefer to pass gen_server options as a proplist and store them in a state being a record. So, they generally write something like that:
 
