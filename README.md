@@ -16,7 +16,7 @@ A lot of people prefer to pass gen_server options as a proplist and store them i
 ...
 
 init(Options) ->
-    State = parse_options(Options, State),
+    State = parse_options(Options, #state{}),
     {ok, State}.
 
 ...
@@ -45,7 +45,7 @@ But instead, you could just write:
 }).
 
 init(Options) ->
-    State = parse_options(Options, State),
+    State = parse_options(Options, #state{}),
     {ok, State}.
 ```
 
