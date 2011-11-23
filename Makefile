@@ -7,7 +7,7 @@ all:
 
 test: all
 	@mkdir -p .eunit
-	$(REBAR) eunit
+	$(REBAR) eunit skip_deps=true
 
 clean:
 	$(REBAR) clean
